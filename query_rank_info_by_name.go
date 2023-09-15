@@ -18,7 +18,8 @@ func main() {
 	account_name := "你们别抢我补位"
 	fmt.Println("I am", account_name)
 	czw_port_token := get_port_token.Return_port_token() + "/"
-	fmt.Println(czw_port_token, "==========-=-============")
+	fmt.Println(czw_port_token, "======================")
+	fmt.Println("==================================================================")
 
 	ID_info := tools.Return_getAccountID_by_summonerName(account_name)
 
@@ -26,7 +27,7 @@ func main() {
 
 	//czw_port_token := lcu.Get_port_token()
 
-	czw_champion_map := tools.Get_champion_map("./data/champion_files/simple_champion_list.json") //各个英雄的数据
+	czw_champion_map := tools.Get_champion_map("./data/champion_files/simple_champion_list.json") //这个json文件里是12.6版本各个英雄的数据
 	var rank_30_data = make([]lcu.GameInfo, 0, 30)
 	var win_num int = 2
 	var no_30 bool

@@ -32,6 +32,7 @@ func Use_getAccountID_by_summonerName() {
 
 }
 
+// 这个函数也执行了get_port_token.Return_port_token。
 func Return_getAccountID_by_summonerName(account_name string) *lcu.CurrSummoner {
 
 	port_token := get_port_token.Return_port_token() + "/"
