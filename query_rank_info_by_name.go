@@ -19,6 +19,7 @@ func main() {
 	fmt.Println("I am", account_name)
 	czw_port_token := get_port_token.Return_port_token() + "/"
 	fmt.Println(czw_port_token, "======================")
+	fmt.Println("接下来才是程序内容")
 	fmt.Println("==================================================================")
 
 	ID_info := tools.Return_getAccountID_by_summonerName(account_name)
