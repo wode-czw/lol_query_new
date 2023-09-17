@@ -17,7 +17,7 @@ import (
 //	Get_MTD_by_gameID_v2(6847919402, 4046768662, lcu.Get_port_token())
 //}
 
-//拿到结构体并写到文件里
+// 拿到结构体并写到文件里
 func Get_MTD_by_gameID_v1(gameID int, port_token string) {
 	czw_client := New_client()
 	query_command := "lol-match-history/v1/games/" + strconv.Itoa(gameID)
