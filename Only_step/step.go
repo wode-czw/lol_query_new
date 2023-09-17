@@ -24,7 +24,7 @@ func New_client() *http.Client {
 	return client
 }
 
-//详细的游戏信息，具体到每个人
+// 详细的游戏信息，具体到每个人
 func Body_to_struct_return_GameInfo(my_client *http.Client, my_url string) *lcu.GameInfo {
 	resp, err := my_client.Get(my_url)
 	if err != nil {
@@ -45,7 +45,7 @@ func Body_to_struct_return_GameInfo(my_client *http.Client, my_url string) *lcu.
 	return data_struct
 }
 
-//返回召唤师json信息，根据召唤师名字
+// 返回召唤师json信息，根据召唤师名字
 func Body_to_struct_return_CurrSummoner(my_client *http.Client, my_url string) *lcu.CurrSummoner {
 	resp, err := my_client.Get(my_url)
 	if err != nil {

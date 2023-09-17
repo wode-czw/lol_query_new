@@ -98,6 +98,8 @@ func Use_analyse_rank() {
 //########################other function
 
 func New_client() *http.Client {
+
+	//这里的这个tr可以添加很多设置，等会用来构成client
 	tr := &http.Transport{
 		ForceAttemptHTTP2: true,
 		TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
@@ -130,7 +132,8 @@ func Body_to_struct_return_GameInfo(my_client *http.Client, my_url string) *lcu.
 }
 
 func Body_to_struct(my_client *http.Client, my_url string) *lcu.GameListResp {
-	resp, err := my_client.Get(my_url)
+	resp, err := my_client.Get(my_url) //用刚刚创建的client发送get请求，url是查询最近30把的指令
+	fmt.Println("-=-=-=\t\turl\t\t-=-=-=", my_url)
 	if err != nil {
 		fmt.Println("lcu 通信失败", err)
 		log.Fatal("bug")
@@ -263,6 +266,8 @@ func Get_rank30(rank_30_info []lcu.GameInfo, port_token string, accountID int64,
 
 		czw_client := New_client()                     //新建一个client
 		data_struct := Body_to_struct(czw_client, url) //读取body对象到结构体中
+		fmt.Printf("data_struct %T\n", data_struct)
+		fmt.Println("data_struct data ", data_struct.AccountID)
 
 		if len(data_struct.Games.Games) == 0 {
 
