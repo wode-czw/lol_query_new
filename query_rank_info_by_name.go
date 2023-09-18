@@ -28,8 +28,8 @@ func main() {
 
 	//czw_port_token := lcu.Get_port_token()
 
-	czw_champion_map := tools.Get_champion_map("./data/champion_files/simple_champion_list.json") //这个json文件里是12.6版本各个英雄的数据
-	var rank_30_data = make([]lcu.GameInfo, 0, 30)                                                //分配三十个lcu.GameInfo结构体用来存放等会获得的30场数据
+	//czw_champion_map := tools.Get_champion_map("./data/champion_files/simple_champion_list.json") //这个json文件里是12.6版本各个英雄的数据
+	var rank_30_data = make([]lcu.GameInfo, 0, 30) //分配三十个lcu.GameInfo结构体用来存放等会获得的30场数据
 	var win_num int = 0
 	var no_30 bool
 	rank_30_data, win_num, no_30 = tools.Get_rank30(rank_30_data, czw_port_token, account_ID, 0, 20)
@@ -60,6 +60,6 @@ func main() {
 
 		}
 	}
-	fmt.Printf("擅长英雄的平均伤害转化率为 %-5.2f", adverage_good_champion_MTD/use_time)
-	fmt.Println("a change from github")
+	//fmt.Printf("擅长英雄的平均伤害转化率为 %-5.2f", adverage_good_champion_MTD/use_time)
+	//fmt.Println("a change from github")
 }
