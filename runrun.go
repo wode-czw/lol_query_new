@@ -17,7 +17,7 @@ func main() {
 	PrintCurrSummonerInfo(ID_info)
 }
 
-// chatgpt写的
+// chatgpt写的一行一行展示lcu.CurrSummoner的数据
 func PrintCurrSummonerInfo(summoner *lcu.CurrSummoner) {
 	fmt.Printf("AccountId:\t\t\t%d\n", summoner.AccountId)
 	fmt.Printf("DisplayName:\t\t\t%s\n", summoner.DisplayName)
