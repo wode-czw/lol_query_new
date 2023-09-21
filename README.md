@@ -11,7 +11,15 @@ the account you want to query must in the same area with your account who is log
 即使这个人隐藏了战绩也没用关系，因为wegame不让查的是wegame的数据库，我们使用lcu数据库查的是英雄联盟存的数据
 
 There are several script to get infomation in cmd folder. 
+```
 1.
 go run .\cmd\get_token_port\give_url_port.go
 After you start the League of Legend,this code will return the token and the port of the LOL client 
+```
+
+2.
+```
+go run .\cmd\show_my_account\show_my_info.go
+```
+根据召唤师名字可以展示用户的一些简单信息信息
 

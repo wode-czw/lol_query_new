@@ -65,27 +65,5 @@ func Return_port_token() string {
 	//log.Printf("listen on :%d, lcu api:%s\n", port, proxyURL)
 
 	return proxyURL
-	/*
-		err = http.ListenAndServe(fmt.Sprintf(":%d", port), http.HandlerFunc(func(w http.ResponseWriter,
-			r *http.Request) {
-			req, _ := http.NewRequest(r.Method, proxyURL+r.URL.Path+"?"+r.URL.RawQuery, nil)
-			req.Body = r.Body
-			req.Header = r.Header
-			resp, err := cli.Do(req)
-			if err != nil {
-				_, _ = fmt.Fprintf(w, "err : %v", err)
-				return
-			}
-			w.Header().Set("Content-Length", resp.Header.Get("Content-Length"))
-			w.Header().Set("Content-Type", resp.Header.Get("Content-Type"))
-			_, _ = io.Copy(w, resp.Body)
-			defer func() {
-				_ = resp.Body.Close()
-			}()
-		}))
-		if err != nil {
-			log.Fatal(err)
-		}
-	*/
 
 }

@@ -2,6 +2,7 @@ package tools
 
 import (
 	"crypto/tls"
+	"czw_lol_query_tools/get_port_token"
 	"czw_lol_query_tools/lcu"
 	"encoding/json"
 	"fmt"
@@ -38,7 +39,7 @@ func Use_analyse_rank() {
 
 	//这个版本的任务是认为这个账号一生一共打了超过30把排位。。。。的前提条件
 
-	port_token := lcu.Get_port_token()
+	port_token := get_port_token.Return_port_token()
 
 	var accountID int64
 	accountID = 2602095920588480
