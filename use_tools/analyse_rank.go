@@ -5,6 +5,7 @@ import (
 	"czw_lol_query_tools/lcu"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 
 	"log"
@@ -133,7 +134,7 @@ func body_to_struct(my_client *http.Client, my_url string) *lcu.GameListResp {
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body) //body是一个json对象
+	body, err := io.ReadAll(resp.Body) //body是一个json对象
 	if err != nil {
 
 		fmt.Println("数据获取失败")

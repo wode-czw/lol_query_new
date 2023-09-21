@@ -21,7 +21,7 @@ import (
 */
 
 func main() {
-	account_name := "只剩冬季"
+	account_name := "AliUps"
 	begin_index := "0"
 	end_index := "10"
 	//------------------------------------------------------------------------------------
@@ -32,19 +32,24 @@ func main() {
 	czw_client := Only_step.New_client()
 
 	//------------------------------------------------------------------------------------
+	//目的是拿到这个人的puuid
 	data_struct := Only_step.Body_to_struct_return_CurrSummoner(czw_client, url)
 	show_Curr_data(data_struct)
 
 	//------------------------------------------------------------------------------------
 	query_match_command := czw_port_token + "lol-match-history/v1/products/lol/" + data_struct.Puuid + "/matches?begIndex=" + begin_index + "&endIndex=" + end_index
 	game_struct := Only_step.Body_to_struct_return_GameInfo_list(czw_client, query_match_command)
-	show_GameInfo_list_data(game_struct)
+	//show_GameInfo_list_data(game_struct)
 
 	//------------------------------------------------------------------------------------
-	game_id_querry_command := czw_port_token + "lol-match-history/v1/games/" + strconv.Itoa(int(game_struct.Games.Games[0].GameId))
-	game_info := Only_step.Body_to_struct_return_GameInfo(czw_client, game_id_querry_command)
-	//ParticipantIdentities[i]就是第i个人
-	show_game_info(game_info)
+	//根据game id获取数据
+	length := len(game_struct.Games.Games)
+	for i := 0; i < length; i++ {
+		game_id_querry_command := czw_port_token + "lol-match-history/v1/games/" + strconv.Itoa(int(game_struct.Games.Games[i].GameId))
+		game_info := Only_step.Body_to_struct_return_GameInfo(czw_client, game_id_querry_command)
+		//ParticipantIdentities[i]就是第i个人
+		show_game_info(game_info, account_name)
+	}
 
 }
 
@@ -66,11 +71,26 @@ func show_GameInfo_list_data(GameInfo_list_data *lcu.LolMatchHistoryMatchHistory
 	fmt.Println("------------------------------------------------------------------------------------------")
 }
 
-func show_game_info(Game_info_data *lcu.GameInfo) {
+// 显示这把游戏里的10个队友
+func show_game_info(Game_info_data *lcu.GameInfo, name string) {
 	for i := 0; i < 10; i++ {
-		fmt.Println(Game_info_data.ParticipantIdentities[i].Player.SummonerName)
+
+		if Game_info_data.ParticipantIdentities[i].Player.SummonerName == name {
+			the_id := Game_info_data.ParticipantIdentities[i].ParticipantId
+			for j := 0; j < 10; j++ {
+				if the_id == Game_info_data.Participants[j].ParticipantId {
+					k := Game_info_data.Participants[j].Stats.Kills
+					d := Game_info_data.Participants[j].Stats.Deaths
+					a := Game_info_data.Participants[j].Stats.Assists
+					fmt.Println("K-D-A:", k, "-", d, "-", a)
+					fmt.Println("--------------------------------------")
+				}
+			}
+
+		}
+
 	}
 
-	fmt.Println(Game_info_data.ParticipantIdentities[1].Player.SummonerName)
-	fmt.Println("------------------------------------------------------------------------------------------")
+	//fmt.Println(Game_info_data.ParticipantIdentities[1].Player.SummonerName)
+	//fmt.Println("------------------------------------------------------------------------------------------")
 }
