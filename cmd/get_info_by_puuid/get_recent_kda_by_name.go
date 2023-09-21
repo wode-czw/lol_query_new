@@ -4,8 +4,11 @@ import (
 	"czw_lol_query_tools/Only_step"
 	"czw_lol_query_tools/get_port_token"
 	"czw_lol_query_tools/lcu"
+	"encoding/json"
 	"fmt"
+	"os"
 	"strconv"
+	"time"
 )
 
 /*
@@ -21,7 +24,7 @@ import (
 */
 
 func main() {
-	account_name := "AliUps"
+	account_name := "集美大学曹兆平"
 	begin_index := "0"
 	end_index := "10"
 	//------------------------------------------------------------------------------------
@@ -50,6 +53,12 @@ func main() {
 		//ParticipantIdentities[i]就是第i个人
 		show_game_info(game_info, account_name)
 	}
+
+	//根据召唤师名字返回召唤师信息，但是只能返回同一个大区的内容
+
+	query_command_time := time.Now().Format("2006-01-02 15:04:05 Mon Jan")[11:13] + "_" + time.Now().Format("2006-01-02 15:04:05 Mon Jan")[14:16] //hour_min
+	file_name := "data/召唤师名字json/" + account_name + "_" + query_command_time + ".json"
+	write_file_by_CurrSummoner(file_name, data_struct)
 
 }
 
@@ -93,4 +102,19 @@ func show_game_info(Game_info_data *lcu.GameInfo, name string) {
 
 	//fmt.Println(Game_info_data.ParticipantIdentities[1].Player.SummonerName)
 	//fmt.Println("------------------------------------------------------------------------------------------")
+}
+
+func write_file_by_CurrSummoner(filename string, data *lcu.CurrSummoner) {
+	fileobj, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE, 0644)
+	if err != nil {
+		fmt.Println("os.OpenFile failed ,err: ", err)
+		return
+
+	}
+	defer fileobj.Close()
+
+	write_string, _ := json.MarshalIndent(data, "", "    ")
+
+	fileobj.Write([]byte(string(write_string)))
+
 }
