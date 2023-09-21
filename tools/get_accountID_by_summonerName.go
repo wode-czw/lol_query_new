@@ -32,7 +32,7 @@ func Use_getAccountID_by_summonerName() {
 
 }
 
-// 这个函数也执行了get_port_token.Return_port_token。根据召唤师的用户名获得召唤师的用户信息
+// 这个函数也执行了get_port_token.Return_port_token。根据召唤师的用户名获得召唤师的用户信息,这里调用的是Only_step的内容
 func Return_getAccountID_by_summonerName(account_name string) *lcu.CurrSummoner {
 
 	port_token := get_port_token.Return_port_token() + "/"

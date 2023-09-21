@@ -5,6 +5,7 @@ import (
 	"czw_lol_query_tools/lcu"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -33,19 +34,42 @@ func Body_to_struct_return_GameInfo(my_client *http.Client, my_url string) *lcu.
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body) //body是一个json对象
+	body, err := io.ReadAll(resp.Body) //body是一个json对象
 	if err != nil {
 
 		fmt.Println("数据获取失败")
 	}
 
+	//fmt.Println(string(body))
 	//解析json到结构体中
 	data_struct := &lcu.GameInfo{}
 	json.Unmarshal([]byte(string(body)), &data_struct)
 	return data_struct
 }
 
-// 返回召唤师json信息，根据召唤师名字
+// 因为现在旧的函数似乎失效了，所以我只能够使用新的函数和结构体来执行来执行
+func Body_to_struct_return_GameInfo_list(my_client *http.Client, my_url string) *lcu.LolMatchHistoryMatchHistoryList {
+	resp, err := my_client.Get(my_url)
+	if err != nil {
+		fmt.Println("lcu 通信失败", err)
+		log.Fatal("bug")
+	}
+
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body) //body是一个json对象
+	if err != nil {
+
+		fmt.Println("数据获取失败")
+	}
+
+	//fmt.Println(string(body))
+	//解析json到结构体中
+	data_struct := &lcu.LolMatchHistoryMatchHistoryList{}
+	json.Unmarshal([]byte(string(body)), &data_struct)
+	return data_struct
+}
+
+// 根据召唤师名字,返回召唤师application/json信息,返回的结构体是lcu.CurrSummoner
 func Body_to_struct_return_CurrSummoner(my_client *http.Client, my_url string) *lcu.CurrSummoner {
 	resp, err := my_client.Get(my_url)
 	if err != nil {
@@ -54,7 +78,7 @@ func Body_to_struct_return_CurrSummoner(my_client *http.Client, my_url string) *
 	}
 
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body) //body是一个json对象
+	body, err := io.ReadAll(resp.Body) //body是一个json对象
 	if err != nil {
 
 		fmt.Println("数据获取失败")

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+
 	"log"
 	"net/http"
 	"os"
@@ -28,6 +29,7 @@ import (
 
 // Summoner_name := "牛顿有辆小车220-240"
 // rank_title := "铂金111"
+// 通信失败了
 func main() {
 
 	//这个版本的任务是认为这个账号一生一共打了超过30把排位。。。。的前提条件
@@ -253,6 +255,7 @@ func Get_rank30(rank_30_info []lcu.GameInfo, port_token string, accountID int64,
 	for {
 
 		query_command := fmt.Sprintf("lol-match-history/v3/matchlist/account/%d?begIndex=%d&endIndex=%d", accountID, begin_number, end_number)
+		fmt.Println("see this!!!!!! \t\t\t\t ", query_command)
 		url := port_token + query_command
 		fmt.Println(url)
 

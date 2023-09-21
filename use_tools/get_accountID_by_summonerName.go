@@ -12,6 +12,7 @@ import (
 
 func main() {
 
+	//通信失败了
 	port_token := lcu.Get_port_token()
 
 	//根据召唤师名字返回召唤师信息，但是只能返回同一个大区的内容

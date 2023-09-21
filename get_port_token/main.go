@@ -43,9 +43,6 @@ func Return_port_token() string {
 
 		log.Fatal(err)
 	}
-	fmt.Println("apiUrlFmt:\t", apiUrlFmt)
-	fmt.Println("lcuToken:\t", lcuToken)
-	fmt.Println("lcuPort:\t", lcuPort)
 	proxyURL := fmt.Sprintf(apiUrlFmt, lcuToken, lcuPort)
 	go func() { //不明白为什么要一直进行循环呢？是为了预防服务器临时卡顿吗
 		ticker := time.NewTicker(time.Second * 3)
