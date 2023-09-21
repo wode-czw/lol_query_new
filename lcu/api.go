@@ -92,8 +92,8 @@ type (
 		GameCreationDate      time.Time       `json:"gameCreationDate"`
 		GameDuration          int             `json:"gameDuration"` // 游戏持续时长 秒
 		GameId                int64           `json:"gameId"`
-		GameMode              models.GameMode `json:"gameMode"`
-		GameType              models.GameType `json:"gameType"`
+		GameMode              models.GameMode `json:"gameMode"` //这个是区分大乱斗还是峡谷的。大乱斗的话会显示是ARAM
+		GameType              models.GameType `json:"gameType"` //只要是匹配的，都是MATCHED_GAME
 		GameVersion           string          `json:"gameVersion"`
 		MapId                 int             `json:"mapId"` // 地图id
 		ParticipantIdentities []struct {      // 参与者

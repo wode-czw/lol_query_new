@@ -8,6 +8,8 @@ the account you want to query must in the same area with your account who is log
 查询英雄联盟的最近30把排位的熟悉英雄的召唤师信息--根据名字,id,并且会进行很多公平的计算，
 评分数据会比wegame的更加可靠，因为会计算送头的的负面信息
 
+即使这个人隐藏了战绩也没用关系，因为wegame不让查的是wegame的数据库，我们使用lcu数据库查的是英雄联盟存的数据
+
 There are several script to get infomation in cmd folder. 
 1.
 go run .\cmd\get_token_port\give_url_port.go
