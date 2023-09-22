@@ -1,2 +1,3 @@
-# Git Ignore
-data/
+data/*
+!data/README.md
+data/召唤师名字json/*
