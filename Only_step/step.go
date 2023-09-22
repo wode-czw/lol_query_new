@@ -90,6 +90,28 @@ func Body_to_struct_return_CurrSummoner(my_client *http.Client, my_url string) *
 	return data_struct
 }
 
+// 根据puuid返回召唤师的rank信息
+func Get_ranked_data_by_puuid(my_url string, my_client *http.Client) *lcu.LolRankedRankedStats {
+	resp, err := my_client.Get(my_url)
+	if err != nil {
+		fmt.Println("lcu 通信失败", err)
+		log.Fatal("bug")
+	}
+
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body) //body是一个json对象
+	if err != nil {
+
+		fmt.Println("数据获取失败")
+	}
+
+	//fmt.Println(string(body))
+	//解析json到结构体中
+	rank_data := &lcu.LolRankedRankedStats{}
+	json.Unmarshal([]byte(string(body)), &rank_data)
+	return rank_data
+}
+
 func Body_to_struct(my_client *http.Client, my_url string) *lcu.GameListResp {
 	resp, err := my_client.Get(my_url)
 	if err != nil {
