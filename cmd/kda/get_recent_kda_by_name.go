@@ -24,7 +24,7 @@ import (
 */
 
 func main() {
-	account_name := "YTTZ"
+	account_name := "百世可乐要冰"
 	begin_index := "0"
 	end_index := "10"
 	//------------------------------------------------------------------------------------
@@ -47,12 +47,17 @@ func main() {
 	//------------------------------------------------------------------------------------
 	//根据game id获取数据
 	length := len(game_struct.Games.Games)
+	av_k, av_d, av_a := 0, 0, 0
+	fmt.Println("the Length of data is ", length)
 	for i := 0; i < length; i++ {
 		game_id_querry_command := czw_port_token + "lol-match-history/v1/games/" + strconv.Itoa(int(game_struct.Games.Games[i].GameId))
 		game_info := Only_step.Body_to_struct_return_GameInfo(czw_client, game_id_querry_command)
 		//ParticipantIdentities[i]就是第i个人
-		show_game_info(game_info, account_name)
+		k, d, a := show_game_info(game_info, account_name)
+		av_k, av_d, av_a = av_k+k, av_d+d, av_a+a
+
 	}
+	fmt.Println("average KDA\t\t", av_k/length, av_d/length, av_a/length)
 
 	//根据召唤师名字返回召唤师信息，但是只能返回同一个大区的内容
 
@@ -81,7 +86,8 @@ func show_GameInfo_list_data(GameInfo_list_data *lcu.LolMatchHistoryMatchHistory
 }
 
 // 显示这把游戏里的10个队友
-func show_game_info(Game_info_data *lcu.GameInfo, name string) {
+func show_game_info(Game_info_data *lcu.GameInfo, name string) (k, d, a int) {
+
 	for i := 0; i < 10; i++ {
 
 		if Game_info_data.ParticipantIdentities[i].Player.SummonerName == name {
@@ -91,14 +97,17 @@ func show_game_info(Game_info_data *lcu.GameInfo, name string) {
 					k := Game_info_data.Participants[j].Stats.Kills
 					d := Game_info_data.Participants[j].Stats.Deaths
 					a := Game_info_data.Participants[j].Stats.Assists
+
 					fmt.Println("K-D-A:", k, "-", d, "-", a)
 					fmt.Println("--------------------------------------")
+					return k, d, a
 				}
 			}
 
 		}
 
 	}
+	return
 
 	//fmt.Println(Game_info_data.ParticipantIdentities[1].Player.SummonerName)
 	//fmt.Println("------------------------------------------------------------------------------------------")
