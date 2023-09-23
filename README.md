@@ -12,18 +12,18 @@ the account you want to query must in the same area with your account who is log
 
 There are several script to get infomation in cmd folder. 
 
-1.启动了英雄联盟客户端后执行下列命令可以获得客户端启动时的token和port组成的查询数据的url
+## 启动了英雄联盟客户端后执行下列命令可以获得客户端启动时的token和port组成的查询数据的url
 ```
 go run .\cmd\see_port_token\give_url_port.go
 ```
 
 
-2.根据召唤师名字可以展示用户的一些简单信息
+## 根据召唤师名字可以展示用户的一些简单信息
 ```
 go run .\cmd\show_info\show_my_info.go
 ```
 
-编译程序就能够得到应用程序，只需要在启动客户端之后点击程序就在终端查询了。（还没实现）
+## 编译程序就能够得到应用程序，只需要在启动客户端之后点击程序就在终端查询了。（还没实现）
 ```
 go build app.go
 ```
